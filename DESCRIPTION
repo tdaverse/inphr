@@ -15,7 +15,7 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://github.com/tdaverse/inphr
+URL: https://github.com/tdaverse/inphr, https://tdaverse.github.io/inphr/
 BugReports: https://github.com/tdaverse/inphr/issues
 Imports: 
     cli,
