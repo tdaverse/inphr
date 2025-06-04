@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/tdaverse/inphr/graph/badge.svg)](https://app.codecov.io/gh/tdaverse/inphr)
+[![R-CMD-check](https://github.com/tdaverse/inphr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tdaverse/inphr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of {inphr} is to provide a set of functions for performing null
