@@ -14,16 +14,16 @@ test_two_sample_test_inputs <- function() {
   result <- two_sample_test(ps1, ps2, B = 10L)
   expect_true(is.numeric(result))
 
-  ps1 <- phutil::wasserstein_pairwise_distances(
+  D <- phutil::wasserstein_pairwise_distances(
     ps1,
     dimension = 0L,
     p = 2L,
     ncores = 1L
   )
   ps2 <- 0
-  expect_error(two_sample_test(ps1, ps2))
+  expect_error(two_sample_test(D, ps2))
   ps2 <- c(5L, 5L) # Sample sizes
-  result <- two_sample_test(ps1, ps2, B = 10L)
+  result <- two_sample_test(D, ps2, B = 10L)
   expect_true(is.numeric(result))
 }
 
