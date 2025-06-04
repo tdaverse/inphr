@@ -10,14 +10,14 @@ coverage](https://codecov.io/gh/tdaverse/inphr/graph/badge.svg)](https://app.cod
 [![R-CMD-check](https://github.com/tdaverse/inphr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tdaverse/inphr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of {inphr} is to provide a set of functions for performing null
-hypothesis testing on samples of persistence diagrams using the theory
-of permutations. Currently, only two-sample testing is implemented.
-Inputs can be either samples of persistence diagrams themselves or
-vectorizations. In the former case, they are embedded in a metric space
-using either the Bottleneck or Wasserstein distance. In the former case,
-persistence data becomes functional data and inference is performed
-using tools available in the
+The goal of [{inphr}](https://tdaverse.github.io/inphr/) is to provide a
+set of functions for performing null hypothesis testing on samples of
+persistence diagrams using the theory of permutations. Currently, only
+two-sample testing is implemented. Inputs can be either samples of
+persistence diagrams themselves or vectorizations. In the former case,
+they are embedded in a metric space using either the Bottleneck or
+Wasserstein distance. In the former case, persistence data becomes
+functional data and inference is performed using tools available in the
 [{fdatest}](https://permaverse.github.io/fdatest/) package.
 
 ## Installation
@@ -46,12 +46,16 @@ set contains persistence diagrams computed from noisy samples of 2-armed
 Archimedean spirals. Each set contains 24 persistence diagrams, each
 computed from a sample of 120 points sampled from the respective shape,
 with Gaussian noise added (standard deviation = 0.05). The persistence
-diagrams were computed using the \[`TDA::ripsDiag()`\] function with a
-maximum scale of 6 and up to dimension 2. You can use the
-`two_sample_test()` function to perform a two-sample test on these
-persistence diagrams. For example, to test whether the first 5
-persistence diagrams from the first set are significantly different from
-the first 5 persistence diagrams from the second set, you can run:
+diagrams were computed using the
+[`TDA::ripsDiag()`](https://www.rdocumentation.org/packages/TDA/versions/1.9.1/topics/ripsDiag)
+function with a maximum scale of 6 and up to dimension 2.
+
+You can use the
+[`two_sample_test()`](https://tdaverse.github.io/inphr/reference/two_sample_test.html)
+function to perform a two-sample test on these persistence diagrams. For
+example, to test whether the first 5 persistence diagrams from the first
+set are significantly different from the first 5 persistence diagrams
+from the second set, you can run:
 
 ``` r
 two_sample_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
@@ -69,11 +73,11 @@ two_sample_test(trefoils1[1:5], archspirals[1:5], B = 100L)
 
 ## Contributions
 
+### Code of Conduct
+
 Contributions are welcome! Please feel free to open an issue or a pull
 request if you have any suggestions or improvements. The package is
 still in its early stages, so any feedback is appreciated.
-
-### Code of Conduct
 
 Please note that the {inphr} project is released with a [Contributor
 Code of
