@@ -1,19 +1,36 @@
-# Test basic functionality with mock data
+# Test parse_inputs() function
+test_two_sample_test_inputs <- function() {
+  ps1 <- 0
+  ps2 <- 0
+  expect_error(two_sample_test(ps1, ps2))
+  ps1 <- trefoils1[1:5]
+  expect_error(two_sample_test(ps1, ps2))
+  ps2 <- trefoils2[1:5]
+  result <- two_sample_test(ps1, ps2, B = 10L)
+  expect_true(is.numeric(result))
+
+  ps1 <- c(trefoils1[1:5], trefoils2[1:5])
+  ps2 <- c(5L, 5L) # Sample sizes
+  result <- two_sample_test(ps1, ps2, B = 10L)
+  expect_true(is.numeric(result))
+
+  ps1 <- phutil::wasserstein_pairwise_distances(
+    ps1,
+    dimension = 0L,
+    p = 2L,
+    ncores = 1L
+  )
+  ps2 <- 0
+  expect_error(two_sample_test(ps1, ps2))
+  ps2 <- c(5L, 5L) # Sample sizes
+  result <- two_sample_test(ps1, ps2, B = 10L)
+  expect_true(is.numeric(result))
+}
+
+# Test basic functionality
 test_two_sample_test_basic <- function() {
-  # Mock persistence sets
-  ps1 <- trefoils1[1:5] # Assuming trefoils1 is a persistence set
-  ps2 <- trefoils2[1:5] # Assuming trefoils2 is a persistence set
-
-  # Mock parse_inputs function
-  parse_inputs <- function(x, y, dimension, p, ncores) {
-    list(
-      D = matrix(runif(100), 10, 10),
-      sample_sizes = c(5, 5)
-    )
-  }
-
-  # Mock null_spec function
-  null_spec <- function(...) NULL
+  ps1 <- trefoils1[1:5]
+  ps2 <- trefoils2[1:5]
 
   result <- two_sample_test(ps1, ps2, B = 10L)
   expect_true(is.numeric(result))
@@ -22,8 +39,8 @@ test_two_sample_test_basic <- function() {
 
 # Test parameter validation
 test_two_sample_test_params <- function() {
-  ps1 <- trefoils1[1:5] # Assuming trefoils1 is a persistence set
-  ps2 <- trefoils2[1:5] # Assuming trefoils2 is a persistence set
+  ps1 <- trefoils1[1:5]
+  ps2 <- trefoils2[1:5]
 
   expect_error(two_sample_test(ps1, ps2, dimension = -1L))
   expect_error(two_sample_test(ps1, ps2, p = 0L))
@@ -33,7 +50,12 @@ test_two_sample_test_params <- function() {
 
 # Test with distance matrix input
 test_two_sample_test_dist <- function() {
-  D <- as.dist(matrix(runif(100), 10, 10))
+  D <- phutil::wasserstein_pairwise_distances(
+    c(trefoils1[1:5], trefoils2[1:5]),
+    dimension = 0L,
+    p = 2L,
+    ncores = 1L
+  )
   sample_sizes <- c(5L, 5L)
 
   result <- two_sample_test(D, sample_sizes, B = 10L)
@@ -43,16 +65,16 @@ test_two_sample_test_dist <- function() {
 
 # Test verbose output
 test_two_sample_test_verbose <- function() {
-  ps1 <- trefoils1[1:5] # Assuming trefoils1 is a persistence set
-  ps2 <- trefoils2[1:5] # Assuming trefoils2 is a persistence set
+  ps1 <- trefoils1[1:5]
+  ps2 <- trefoils2[1:5]
 
   expect_silent(two_sample_test(ps1, ps2, B = 10L, verbose = FALSE))
 }
 
 # Test different npc methods
 test_two_sample_test_npc <- function() {
-  ps1 <- trefoils1[1:5] # Assuming trefoils1 is a persistence set
-  ps2 <- trefoils2[1:5] # Assuming trefoils2 is a persistence set
+  ps1 <- trefoils1[1:5]
+  ps2 <- trefoils2[1:5]
 
   result_tippett <- two_sample_test(ps1, ps2, B = 10L, npc = "tippett")
   result_fisher <- two_sample_test(ps1, ps2, B = 10L, npc = "fisher")
@@ -63,6 +85,7 @@ test_two_sample_test_npc <- function() {
 
 # Run all tests
 test_two_sample_test <- function() {
+  test_two_sample_test_inputs()
   test_two_sample_test_basic()
   test_two_sample_test_params()
   test_two_sample_test_dist()
