@@ -14,16 +14,16 @@ test_two_sample_test_inputs <- function() {
   result <- two_sample_test(ps1, ps2, B = 10L)
   expect_true(is.numeric(result))
 
-  ps1 <- phutil::wasserstein_pairwise_distances(
+  D <- phutil::wasserstein_pairwise_distances(
     ps1,
     dimension = 0L,
     p = 2L,
     ncores = 1L
   )
   ps2 <- 0
-  expect_error(two_sample_test(ps1, ps2))
+  expect_error(two_sample_test(D, ps2))
   ps2 <- c(5L, 5L) # Sample sizes
-  result <- two_sample_test(ps1, ps2, B = 10L)
+  result <- two_sample_test(D, ps2, B = 10L)
   expect_true(is.numeric(result))
 }
 
@@ -69,6 +69,18 @@ test_two_sample_test_verbose <- function() {
   ps2 <- trefoils2[1:5]
 
   expect_silent(two_sample_test(ps1, ps2, B = 10L, verbose = FALSE))
+  expect_message(
+    two_sample_test(ps1, ps2, B = 10L, verbose = TRUE),
+    "Parsing inputs..."
+  )
+  expect_message(
+    two_sample_test(ps1, ps2, B = 10L, verbose = TRUE),
+    "Setting up the plausibility function..."
+  )
+  expect_message(
+    two_sample_test(ps1, ps2, B = 10L, verbose = TRUE),
+    "Calculating the p-value..."
+  )
 }
 
 # Test different npc methods
@@ -83,6 +95,15 @@ test_two_sample_test_npc <- function() {
   expect_true(is.numeric(result_fisher))
 }
 
+test_two_sample_test_bottleneck <- function() {
+  ps1 <- trefoils1[1:5]
+  ps2 <- trefoils2[1:5]
+
+  result <- two_sample_test(ps1, ps2, p = Inf, B = 10L)
+  expect_true(is.numeric(result))
+  expect_true(result >= 0 && result <= 1)
+}
+
 # Run all tests
 test_two_sample_test <- function() {
   test_two_sample_test_inputs()
@@ -91,6 +112,7 @@ test_two_sample_test <- function() {
   test_two_sample_test_dist()
   test_two_sample_test_verbose()
   test_two_sample_test_npc()
+  test_two_sample_test_bottleneck()
 }
 
 test_two_sample_test()
