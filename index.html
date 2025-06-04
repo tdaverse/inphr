@@ -50,7 +50,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of {inphr} is to provide a set of functions for performing null hypothesis testing on samples of persistence diagrams using the theory of permutations. Currently, only two-sample testing is implemented. Inputs can be either samples of persistence diagrams themselves or vectorizations. In the former case, they are embedded in a metric space using either the Bottleneck or Wasserstein distance. In the former case, persistence data becomes functional data and inference is performed using tools available in the <a href="https://permaverse.github.io/fdatest/" class="external-link">{fdatest}</a> package.</p>
+<p>The goal of <a href="https://tdaverse.github.io/inphr/">{inphr}</a> is to provide a set of functions for performing null hypothesis testing on samples of persistence diagrams using the theory of permutations. Currently, only two-sample testing is implemented. Inputs can be either samples of persistence diagrams themselves or vectorizations. In the former case, they are embedded in a metric space using either the Bottleneck or Wasserstein distance. In the former case, persistence data becomes functional data and inference is performed using tools available in the <a href="https://permaverse.github.io/fdatest/" class="external-link">{fdatest}</a> package.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -65,7 +65,8 @@
 <p>Let us start by loading the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tdaverse/inphr" class="external-link">inphr</a></span><span class="op">)</span></span></code></pre></div>
-<p>The package contains three sets of persistence diagrams, which can be used for testing. They are available in the package as <code>trefoils1</code>, <code>trefoils2</code>, and <code>archspirals</code>. The first two sets contain persistence diagrams computed from noisy samples of trefoil knots, while the third set contains persistence diagrams computed from noisy samples of 2-armed Archimedean spirals. Each set contains 24 persistence diagrams, each computed from a sample of 120 points sampled from the respective shape, with Gaussian noise added (standard deviation = 0.05). The persistence diagrams were computed using the [<code>TDA::ripsDiag()</code>] function with a maximum scale of 6 and up to dimension 2. You can use the <code><a href="reference/two_sample_test.html">two_sample_test()</a></code> function to perform a two-sample test on these persistence diagrams. For example, to test whether the first 5 persistence diagrams from the first set are significantly different from the first 5 persistence diagrams from the second set, you can run:</p>
+<p>The package contains three sets of persistence diagrams, which can be used for testing. They are available in the package as <code>trefoils1</code>, <code>trefoils2</code>, and <code>archspirals</code>. The first two sets contain persistence diagrams computed from noisy samples of trefoil knots, while the third set contains persistence diagrams computed from noisy samples of 2-armed Archimedean spirals. Each set contains 24 persistence diagrams, each computed from a sample of 120 points sampled from the respective shape, with Gaussian noise added (standard deviation = 0.05). The persistence diagrams were computed using the <a href="https://www.rdocumentation.org/packages/TDA/versions/1.9.1/topics/ripsDiag" class="external-link"><code>TDA::ripsDiag()</code></a> function with a maximum scale of 6 and up to dimension 2.</p>
+<p>You can use the <a href="https://tdaverse.github.io/inphr/reference/two_sample_test.html"><code>two_sample_test()</code></a> function to perform a two-sample test on these persistence diagrams. For example, to test whether the first 5 persistence diagrams from the first set are significantly different from the first 5 persistence diagrams from the second set, you can run:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/two_sample_test.html">two_sample_test</a></span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">trefoils2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9782132</span></span></code></pre></div>
@@ -77,10 +78,10 @@
 <div class="section level2">
 <h2 id="contributions">Contributions<a class="anchor" aria-label="anchor" href="#contributions"></a>
 </h2>
-<p>Contributions are welcome! Please feel free to open an issue or a pull request if you have any suggestions or improvements. The package is still in its early stages, so any feedback is appreciated.</p>
 <div class="section level3">
 <h3 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h3>
+<p>Contributions are welcome! Please feel free to open an issue or a pull request if you have any suggestions or improvements. The package is still in its early stages, so any feedback is appreciated.</p>
 <p>Please note that the {inphr} project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div class="section level3">
