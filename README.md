@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/tdaverse/inphr/graph/badge.svg)](https://app.codecov.io/gh/tdaverse/inphr)
 <!-- badges: end -->
 
 The goal of {inphr} is to provide a set of functions for performing null
