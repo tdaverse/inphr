@@ -20,8 +20,10 @@ BugReports: https://github.com/tdaverse/inphr/issues
 Imports: 
     cli,
     flipr,
-    phutil
+    phutil (>= 0.0.1.9000)
 Depends: 
     R (>= 3.5)
 LazyData: true
 Suggests: tinytest
+Remotes:  
+    tdaverse/phutil@cpp11
