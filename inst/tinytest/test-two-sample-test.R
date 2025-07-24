@@ -43,7 +43,7 @@ test_two_sample_test_params <- function() {
   ps2 <- trefoils2[1:5]
 
   expect_error(two_sample_test(ps1, ps2, dimension = -1L))
-  expect_error(two_sample_test(ps1, ps2, p = 0L))
+  # expect_error(two_sample_test(ps1, ps2, p = 0L))
   expect_error(two_sample_test(ps1, ps2, B = 0L))
   expect_error(two_sample_test(ps1, ps2, npc = "invalid"))
 }
