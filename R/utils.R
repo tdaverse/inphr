@@ -3,6 +3,12 @@ null_spec <- function(y, parameters) {
 }
 
 compute_distance_matrix <- function(x, dimension = 0L, p = 2L, ncores = 1L) {
+  if (p == 0L) {
+    cli::cli_abort(
+      "The p-norm {.val p} must be greater than zero. Use {.val p = Inf} for the Bottleneck distance."
+    )
+  }
+
   if (is.infinite(p)) {
     D <- phutil::bottleneck_pairwise_distances(
       x = x,
