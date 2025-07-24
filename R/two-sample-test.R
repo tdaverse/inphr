@@ -6,7 +6,8 @@
 #' - A persistence set, which is a collection of persistence diagrams.
 #' - A distance matrix, which is a pairwise distance matrix between persistence
 #' diagrams.
-#' - One of the PH vectorizations available in the [{tdarec}]() package.
+#' - One of the PH vectorizations available in the
+#' [{TDAvec}](https://cran.r-project.org/package=TDAvec) package.
 #'
 #' @param x An object of class `persistence_set` typically produced by
 #'   [`phutil::as_persistence_set()`] or of class `dist` typically produced by

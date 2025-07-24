@@ -65,7 +65,8 @@ various forms:
 \item A persistence set, which is a collection of persistence diagrams.
 \item A distance matrix, which is a pairwise distance matrix between persistence
 diagrams.
-\item One of the PH vectorizations available in the \url{{tdarec}} package.
+\item One of the PH vectorizations available in the
+\href{https://cran.r-project.org/package=TDAvec}{{TDAvec}} package.
 }
 }
 \examples{
