@@ -124,11 +124,11 @@ the permutation hypothesis test. Defaults to <code>1000L</code>.</p></dd>
 <dt id="arg-stat-functions">stat_functions<a class="anchor" aria-label="anchor" href="#arg-stat-functions"></a></dt>
 <dd><p>A list of functions that compute test statistics to be
 used for solving the inference problem. These functions must take two
-arguments: First, an object of class <code>dist</code> representing a distance matrix
-and second, an integer value specifying the size of the first sample.
-Defaults to <code>list(flipr::stat_t_ip, flipr::stat_f_ip</code>)` which are distance-
-based statistics equivalent to Student's and Fisher's statistics
-respectively.</p></dd>
+arguments: first, an object of class <code>dist</code> representing a distance matrix
+and second, an integer vector specifying the indices of the data points
+belonging to the first sample. Defaults to
+<code>list(flipr::stat_t_ip, flipr::stat_f_ip</code>)` which are distance-based
+statistics equivalent to Student's and Fisher's statistics respectively.</p></dd>
 
 
 <dt id="arg-npc">npc<a class="anchor" aria-label="anchor" href="#arg-npc"></a></dt>
@@ -158,7 +158,7 @@ distribution.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">two_sample_test</span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">trefoils2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9584119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9485109</span>
 <span class="r-in"><span><span class="fu">two_sample_test</span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">archspirals</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.008047755</span>
 </code></pre></div>
