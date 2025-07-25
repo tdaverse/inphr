@@ -49,11 +49,11 @@ the permutation hypothesis test. Defaults to \code{1000L}.}
 
 \item{stat_functions}{A list of functions that compute test statistics to be
 used for solving the inference problem. These functions must take two
-arguments: First, an object of class \code{dist} representing a distance matrix
-and second, an integer value specifying the size of the first sample.
-Defaults to \verb{list(flipr::stat_t_ip, flipr::stat_f_ip})` which are distance-
-based statistics equivalent to Student's and Fisher's statistics
-respectively.}
+arguments: first, an object of class \code{dist} representing a distance matrix
+and second, an integer vector specifying the indices of the data points
+belonging to the first sample. Defaults to
+\verb{list(flipr::stat_t_ip, flipr::stat_f_ip})` which are distance-based
+statistics equivalent to Student's and Fisher's statistics respectively.}
 
 \item{npc}{A string specifying the non-parametric combination method to use.
 Choices are either \code{"tippett"} (default) or \code{"fisher"}. The former
