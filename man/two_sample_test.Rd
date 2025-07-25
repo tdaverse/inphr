@@ -11,7 +11,9 @@ two_sample_test(
   p = 2L,
   ncores = 1L,
   B = 1000L,
+  stat_functions = list(flipr::stat_t_ip, flipr::stat_f_ip),
   npc = "tippett",
+  seed = NULL,
   verbose = FALSE
 )
 }
@@ -45,17 +47,29 @@ sequentially.}
 \item{B}{An integer value specifying the number of permutations to use for
 the permutation hypothesis test. Defaults to \code{1000L}.}
 
+\item{stat_functions}{A list of functions that compute test statistics to be
+used for solving the inference problem. These functions must take two
+arguments: First, an object of class \code{dist} representing a distance matrix
+and second, an integer value specifying the size of the first sample.
+Defaults to \verb{list(flipr::stat_t_ip, flipr::stat_f_ip})` which are distance-
+based statistics equivalent to Student's and Fisher's statistics
+respectively.}
+
 \item{npc}{A string specifying the non-parametric combination method to use.
 Choices are either \code{"tippett"} (default) or \code{"fisher"}. The former
 corresponds to the Tippet's method, while the latter corresponds to
 Fisher's method.}
 
+\item{seed}{An integer value specifying the seed for random number
+generation. Defaults to \code{NULL} which uses current time.}
+
 \item{verbose}{A boolean value indicating whether to print some information
 about the progress of the computation. Defaults to \code{FALSE}.}
 }
 \value{
-A p-value from the two-sample test where the null hypothesis is that
-the two samples come from the same distribution.
+A numeric value storing the p-value from the two-sample test where
+the null hypothesis is that the two samples come from the same
+distribution.
 }
 \description{
 This function performs a two-sample test for persistence homology data using

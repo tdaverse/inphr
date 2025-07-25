@@ -32,15 +32,25 @@
 #'   sequentially.
 #' @param B An integer value specifying the number of permutations to use for
 #'   the permutation hypothesis test. Defaults to `1000L`.
+#' @param stat_functions A list of functions that compute test statistics to be
+#'   used for solving the inference problem. These functions must take two
+#'   arguments: First, an object of class `dist` representing a distance matrix
+#'   and second, an integer value specifying the size of the first sample.
+#'   Defaults to `list(flipr::stat_t_ip, flipr::stat_f_ip`)` which are distance-
+#'   based statistics equivalent to Student's and Fisher's statistics
+#'   respectively.
 #' @param npc A string specifying the non-parametric combination method to use.
 #'   Choices are either `"tippett"` (default) or `"fisher"`. The former
 #'   corresponds to the Tippet's method, while the latter corresponds to
 #'   Fisher's method.
+#' @param seed An integer value specifying the seed for random number
+#'   generation. Defaults to `NULL` which uses current time.
 #' @param verbose A boolean value indicating whether to print some information
 #'   about the progress of the computation. Defaults to `FALSE`.
 #'
-#' @returns A p-value from the two-sample test where the null hypothesis is that
-#'   the two samples come from the same distribution.
+#' @returns A numeric value storing the p-value from the two-sample test where
+#'   the null hypothesis is that the two samples come from the same
+#'   distribution.
 #'
 #' @export
 #' @examples
@@ -53,7 +63,9 @@ two_sample_test <- function(
   p = 2L,
   ncores = 1L,
   B = 1000L,
+  stat_functions = list(flipr::stat_t_ip, flipr::stat_f_ip),
   npc = "tippett",
+  seed = NULL,
   verbose = FALSE
 ) {
   if (verbose) cli::cli_alert_info("Parsing inputs...")
@@ -70,11 +82,11 @@ two_sample_test <- function(
   # We could use alternative statistics for PH vectorizations
   pf <- flipr::PlausibilityFunction$new(
     null_spec = null_spec,
-    stat_functions = list(flipr::stat_t_ip, flipr::stat_f_ip),
+    stat_functions = stat_functions,
     stat_assignments = list(mean = 1, sd = 2),
     D,
     sample_sizes[1],
-    seed = 1234
+    seed = if (is.null(seed)) Sys.time() else seed
   )
   pf$alternative <- "right_tail"
   pf$nperms <- B

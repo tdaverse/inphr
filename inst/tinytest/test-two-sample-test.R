@@ -104,6 +104,15 @@ test_two_sample_test_bottleneck <- function() {
   expect_true(result >= 0 && result <= 1)
 }
 
+test_two_sample_test_seed <- function() {
+  ps1 <- trefoils1[1:5]
+  ps2 <- trefoils2[1:5]
+
+  result <- two_sample_test(ps1, ps2, p = Inf, B = 10L, seed = 1234)
+  expect_true(is.numeric(result))
+  expect_true(result >= 0 && result <= 1)
+}
+
 # Run all tests
 test_two_sample_test <- function() {
   test_two_sample_test_inputs()
@@ -113,6 +122,7 @@ test_two_sample_test <- function() {
   test_two_sample_test_verbose()
   test_two_sample_test_npc()
   test_two_sample_test_bottleneck()
+  test_two_sample_test_seed()
 }
 
 test_two_sample_test()
