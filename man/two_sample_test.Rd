@@ -14,7 +14,9 @@ two_sample_test(
   stat_functions = list(flipr::stat_t_ip, flipr::stat_f_ip),
   npc = "tippett",
   seed = NULL,
-  verbose = FALSE
+  verbose = FALSE,
+  keep_null_distribution = FALSE,
+  keep_permutations = FALSE
 )
 }
 \arguments{
@@ -65,11 +67,22 @@ generation. Defaults to \code{NULL} which uses current time.}
 
 \item{verbose}{A boolean value indicating whether to print some information
 about the progress of the computation. Defaults to \code{FALSE}.}
+
+\item{keep_null_distribution}{A boolean specifying whether the empirical
+permutation null distribution should be returned as well. Defaults to
+\code{FALSE}.}
+
+\item{keep_permutations}{A boolean specifying whether the list of sampled
+permutations used to compute the empirical permutation null distribution
+should be returned as well. Defaults to \code{FALSE}.}
 }
 \value{
 A numeric value storing the p-value from the two-sample test where
 the null hypothesis is that the two samples come from the same
-distribution.
+distribution. If one of \code{keep_null_distribution} or \code{keep_permutations} is
+set to \code{TRUE}, then the output will be a list containing the p-value and
+the null distribution (if \code{keep_null_distribution} is set to \code{TRUE}) and
+the list of sampled permutations (if \code{keep_permutations} is set to \code{TRUE}).
 }
 \description{
 This function performs a two-sample test for persistence homology data using
