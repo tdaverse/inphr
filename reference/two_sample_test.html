@@ -72,7 +72,9 @@ diagrams.</p></li>
 <span>  stat_functions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">flipr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/flipr/man/two-sample-stats.html" class="external-link">stat_t_ip</a></span>, <span class="fu">flipr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/flipr/man/two-sample-stats.html" class="external-link">stat_f_ip</a></span><span class="op">)</span>,</span>
 <span>  npc <span class="op">=</span> <span class="st">"tippett"</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  keep_null_distribution <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  keep_permutations <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -147,18 +149,33 @@ generation. Defaults to <code>NULL</code> which uses current time.</p></dd>
 <dd><p>A boolean value indicating whether to print some information
 about the progress of the computation. Defaults to <code>FALSE</code>.</p></dd>
 
+
+<dt id="arg-keep-null-distribution">keep_null_distribution<a class="anchor" aria-label="anchor" href="#arg-keep-null-distribution"></a></dt>
+<dd><p>A boolean specifying whether the empirical
+permutation null distribution should be returned as well. Defaults to
+<code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-keep-permutations">keep_permutations<a class="anchor" aria-label="anchor" href="#arg-keep-permutations"></a></dt>
+<dd><p>A boolean specifying whether the list of sampled
+permutations used to compute the empirical permutation null distribution
+should be returned as well. Defaults to <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A numeric value storing the p-value from the two-sample test where
 the null hypothesis is that the two samples come from the same
-distribution.</p>
+distribution. If one of <code>keep_null_distribution</code> or <code>keep_permutations</code> is
+set to <code>TRUE</code>, then the output will be a list containing the p-value and
+the null distribution (if <code>keep_null_distribution</code> is set to <code>TRUE</code>) and
+the list of sampled permutations (if <code>keep_permutations</code> is set to <code>TRUE</code>).</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">two_sample_test</span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">trefoils2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9485109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.987984</span>
 <span class="r-in"><span><span class="fu">two_sample_test</span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">archspirals</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.008047755</span>
 </code></pre></div>
