@@ -42,6 +42,8 @@
 #'   - `data.eval`: A numeric matrix of shape \eqn{n \times p} storing the evaluation of the functional data on a uniform grid.
 #'   - `heatmap.matrix`: A numeric matrix storing the p-values. Used only for plots.
 #'
+#' @references Pini, A., & Vantini, S. (2017). Interval-wise testing for functional data. Journal of Nonparametric Statistics, 29(2), 407-424.
+#'
 #' @export
 #' @examples
 #' out <- two_sample_functional_test(trefoils1, archspirals, B = 100L, scale_size = 50L)

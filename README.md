@@ -30,7 +30,7 @@ You can install the development version of inphr from
 pak::pak("tdaverse/inphr")
 ```
 
-## Example
+## Usage
 
 Let us start by loading the package:
 
@@ -38,38 +38,115 @@ Let us start by loading the package:
 library(inphr)
 ```
 
-The package contains three sets of persistence diagrams, which can be
-used for testing. They are available in the package as `trefoils1`,
-`trefoils2`, and `archspirals`. The first two sets contain persistence
-diagrams computed from noisy samples of trefoil knots, while the third
-set contains persistence diagrams computed from noisy samples of 2-armed
-Archimedean spirals. Each set contains 24 persistence diagrams, each
-computed from a sample of 120 points sampled from the respective shape,
-with Gaussian noise added (standard deviation = 0.05). The persistence
-diagrams were computed using the
+### Toy data
+
+The package contains three toy data sets of persistence diagrams, which
+can be used for testing. They are available in the package as
+`trefoils1`, `trefoils2`, and `archspirals`. The first two sets contain
+persistence diagrams computed from noisy samples of trefoil knots, while
+the third set contains persistence diagrams computed from noisy samples
+of 2-armed Archimedean spirals. Each set contains 24 persistence
+diagrams, each computed from a sample of 120 points sampled from the
+respective shape, with Gaussian noise added (standard deviation = 0.05).
+The persistence diagrams were computed using the
 [`TDA::ripsDiag()`](https://www.rdocumentation.org/packages/TDA/versions/1.9.1/topics/ripsDiag)
 function with a maximum scale of 6 and up to dimension 2.
 
+### Test in the space of diagrams
+
 You can use the
-[`two_sample_test()`](https://tdaverse.github.io/inphr/reference/two_sample_test.html)
-function to perform a two-sample test on these persistence diagrams. For
-example, to test whether the first 5 persistence diagrams from the first
-set are significantly different from the first 5 persistence diagrams
-from the second set, you can run:
+[`two_sample_diagram_test()`](https://tdaverse.github.io/inphr/reference/two_sample_diagram_test.html)
+function to perform a two-sample test on these persistence diagrams in
+the space of diagrams themselves. For example, to test whether the
+persistence diagrams from `trefoils1` are significantly different from
+the persistence diagrams from `trefoils2`, you can run:
 
 ``` r
-two_sample_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
-#> [1] 0.9782132
+two_sample_diagram_test(trefoils1, trefoils2, B = 100L)
+#> [1] 1
 ```
 
-To test whether the first 5 persistence diagrams from the first set are
-significantly different from the first 5 persistence diagrams from the
-third set, you can run:
+To test whether the persistence diagrams from `trefoils1` are
+significantly different from the persistence diagrams from
+`archspirals`, you can run:
 
 ``` r
-two_sample_test(trefoils1[1:5], archspirals[1:5], B = 100L)
-#> [1] 0.008047755
+two_sample_diagram_test(trefoils1, archspirals, B = 100L)
+#> [1] 0.00990099
 ```
+
+Optionnally, the `two_sample_diagram_test()` function can also output
+the distribution of the test statistic under the null hypothesis as
+estimated by the permutation scheme. To do that, you can use the
+optional argument `keep_null_distribution = TRUE`. It is also possible
+to ask for the permutations themselves to be saved as part of the
+output. To do that, you can use the optional argument
+`keep_permutations = TRUE`.
+
+Test in the space of diagrams themselves is performed using test
+statistics that only rely on distances between sampled diagrams. By
+default, two such statistics that mimic Student’s t-statistic and
+Fisher’s F-statistic are used as proposed in Lovato, I., Pini, A.,
+Stamm, A., & Vantini, S. (2020), *Model-free two-sample test for
+network-valued data*. Computational Statistics & Data Analysis, **144**,
+106896.
+
+### Test in functional spaces
+
+You can use the
+[`two_sample_functional_test()`](https://tdaverse.github.io/inphr/reference/two_sample_functional_test.html)
+function to perform a two-sample test on these persistence diagrams in
+functional spaces using one of five functional representations of
+persistence diagrams, namely: (i) Betti, (ii) Euler characteristic,
+(iii) normalized life, (iv) silhouette and (v) entropy curves.
+Computation of these functional representations is powered by the
+[{TDAvec}](https://cran.r-project.org/package=TDAvec) package. For
+example, to test whether the persistence diagrams from `trefoils1` are
+significantly different from the persistence diagrams from
+`archspirals`, you can use the Betti curve representation and run:
+
+``` r
+out <- two_sample_functional_test(
+  trefoils1,
+  archspirals,
+  representation = "betti",
+  B = 100L
+)
+```
+
+The output is a length-4 list. The first two elements are `xfd` and
+`yfd` which are numeric matrices storing evaluations of the functional
+representation of the diagrams on a grid stored as the third element
+`scale_seq`. You can therefore have a look at the functional data that
+the function produced using something like:
+
+``` r
+matplot(
+  out$scale_seq[-1],
+  t(rbind(out$xfd, out$yfd)),
+  type = "l",
+  col = c(rep(1, length(trefoils1)), rep(2, length(archspirals)))
+)
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+In the case of testing in functional spaces, {inphr} uses the
+interval-wise testing (IWT) procedure powered by the
+[{fdatest}](https://cran.r-project.org/package=fdatest) package which
+has been proposed in Pini, A., & Vantini, S. (2017), *Interval-wise
+testing for functional data*. Journal of Nonparametric Statistics,
+**29**(2), 407-424.
+
+The output indicates on which portions of the scale sequence does the
+difference between the two samples occur, providing strong control of
+the familywise error rate:
+
+``` r
+plot(out$iwt, xrange = range(out$scale_seq))
+```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" /><img src="man/figures/README-unnamed-chunk-8-2.png" width="100%" />
 
 ## Contributions
 

@@ -94,3 +94,6 @@ matplot(
   col = c(rep(1, length(trefoils1)), rep(2, length(archspirals)))
 )
 }
+\references{
+Pini, A., & Vantini, S. (2017). Interval-wise testing for functional data. Journal of Nonparametric Statistics, 29(2), 407-424.
+}

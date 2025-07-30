@@ -59,6 +59,8 @@
 #'   the null distribution (if `keep_null_distribution` is set to `TRUE`) and
 #'   the list of sampled permutations (if `keep_permutations` is set to `TRUE`).
 #'
+#' @references Lovato, I., Pini, A., Stamm, A., & Vantini, S. (2020). Model-free two-sample test for network-valued data. Computational Statistics & Data Analysis, 144, 106896.
+#'
 #' @export
 #' @examples
 #' two_sample_diagram_test(trefoils1[1:5], trefoils2[1:5], B = 100L)

@@ -96,3 +96,6 @@ distance matrix.
 two_sample_diagram_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
 two_sample_diagram_test(trefoils1[1:5], archspirals[1:5], B = 100L)
 }
+\references{
+Lovato, I., Pini, A., Stamm, A., & Vantini, S. (2020). Model-free two-sample test for network-valued data. Computational Statistics & Data Analysis, 144, 106896.
+}
