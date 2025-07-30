@@ -95,7 +95,7 @@ two_sample_functional_test <- function(
     betti = {
       xfd <- do.call(
         rbind,
-        args = lapply(x, \(el) {
+        args = lapply(x, function(el) {
           TDAvec::computeBettiCurve(
             el,
             homDim = dimension,
@@ -105,7 +105,7 @@ two_sample_functional_test <- function(
       )
       yfd <- do.call(
         rbind,
-        args = lapply(y, \(el) {
+        args = lapply(y, function(el) {
           TDAvec::computeBettiCurve(
             el,
             homDim = dimension,
@@ -117,13 +117,13 @@ two_sample_functional_test <- function(
     euler = {
       xfd <- do.call(
         rbind,
-        args = lapply(x, \(el) {
+        args = lapply(x, function(el) {
           TDAvec::computeEulerCharacteristic(el, scaleSeq = scale_seq)
         })
       )
       yfd <- do.call(
         rbind,
-        args = lapply(y, \(el) {
+        args = lapply(y, function(el) {
           TDAvec::computeEulerCharacteristic(el, scaleSeq = scale_seq)
         })
       )
@@ -131,7 +131,7 @@ two_sample_functional_test <- function(
     life = {
       xfd <- do.call(
         rbind,
-        args = lapply(x, \(el) {
+        args = lapply(x, function(el) {
           TDAvec::computeNormalizedLife(
             el,
             homDim = dimension,
@@ -141,7 +141,7 @@ two_sample_functional_test <- function(
       )
       yfd <- do.call(
         rbind,
-        args = lapply(y, \(el) {
+        args = lapply(y, function(el) {
           TDAvec::computeNormalizedLife(
             el,
             homDim = dimension,
@@ -153,7 +153,7 @@ two_sample_functional_test <- function(
     silhouette = {
       xfd <- do.call(
         rbind,
-        args = lapply(x, \(el) {
+        args = lapply(x, function(el) {
           TDAvec::computePersistenceSilhouette(
             el,
             homDim = dimension,
@@ -163,7 +163,7 @@ two_sample_functional_test <- function(
       )
       yfd <- do.call(
         rbind,
-        args = lapply(y, \(el) {
+        args = lapply(y, function(el) {
           TDAvec::computePersistenceSilhouette(
             el,
             homDim = dimension,
@@ -175,7 +175,7 @@ two_sample_functional_test <- function(
     entropy = {
       xfd <- do.call(
         rbind,
-        args = lapply(x, \(el) {
+        args = lapply(x, function(el) {
           TDAvec::computePersistentEntropy(
             el,
             homDim = dimension,
@@ -185,7 +185,7 @@ two_sample_functional_test <- function(
       )
       yfd <- do.call(
         rbind,
-        args = lapply(y, \(el) {
+        args = lapply(y, function(el) {
           TDAvec::computePersistentEntropy(
             el,
             homDim = dimension,
