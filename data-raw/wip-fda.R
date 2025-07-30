@@ -39,17 +39,17 @@ y2 <- purrr::map(spl2, \(D) {
 
 colnames(y1) <- paste0("arm1_", 1:n)
 colnames(y2) <- paste0("arm2_", 1:n)
-bind_cols(r = x[-1], y1, y2) |>
+dplyr::bind_cols(r = x[-1], y1, y2) |>
   tidyr::pivot_longer(-r) |>
   tidyr::separate(name, into = c("SampleId", "PointId")) |>
-  ggplot(aes(
+  ggplot2::ggplot(aes(
     x = r,
     y = value,
     color = SampleId,
     group = interaction(SampleId, PointId)
   )) +
-  geom_line() +
-  theme_bw()
+  ggplot2::geom_line() +
+  ggplot2::theme_bw()
 
 # Mean effect -------------------------------------------------------------
 
@@ -104,16 +104,20 @@ y2 <- purrr::map(spl2, \(D) {
 }) |>
   do.call(cbind, args = _)
 
+out <- two_sample_functional_test(trefoils1, archspirals)
+n <- length(trefoils1)
+y1 <- out[[1]]
+y2 <- out[[2]]
 colnames(y1) <- paste0("arm1_", 1:n)
 colnames(y2) <- paste0("arm2_", 1:n)
-bind_cols(r = x[-1], y1, y2) |>
+dplyr::bind_cols(r = out$scale_seq[-1], y1, y2) |>
   tidyr::pivot_longer(-r) |>
   tidyr::separate(name, into = c("SampleId", "PointId")) |>
-  ggplot(aes(
+  ggplot2::ggplot(aes(
     x = r,
     y = value,
     color = SampleId,
     group = interaction(SampleId, PointId)
   )) +
-  geom_line() +
-  theme_bw()
+  ggplot2::geom_line() +
+  ggplot2::theme_bw()

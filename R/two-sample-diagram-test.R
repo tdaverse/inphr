@@ -1,13 +1,11 @@
-#' Two-Sample Test for Persistence Homology Data
+#' Two-sample test for diagram representation of persistence homology data
 #'
 #' This function performs a two-sample test for persistence homology data using
-#' the theory of permutation hypothesis testing. The input data can take on
-#' various forms:
-#' - A persistence set, which is a collection of persistence diagrams.
-#' - A distance matrix, which is a pairwise distance matrix between persistence
-#' diagrams.
-#' - One of the PH vectorizations available in the
-#' [{TDAvec}](https://cran.r-project.org/package=TDAvec) package.
+#' the theory of permutation hypothesis testing to test the null hypothesis that
+#' the two samples come from the same distribution. The inference is performed
+#' using test statistics that only involve distances between persistence diagrams.
+#' Hence, the input data can be either a persistence set or a precomputed
+#' distance matrix.
 #'
 #' @param x An object of class `persistence_set` typically produced by
 #'   [`phutil::as_persistence_set()`] or of class `dist` typically produced by
@@ -63,9 +61,9 @@
 #'
 #' @export
 #' @examples
-#' two_sample_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
-#' two_sample_test(trefoils1[1:5], archspirals[1:5], B = 100L)
-two_sample_test <- function(
+#' two_sample_diagram_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
+#' two_sample_diagram_test(trefoils1[1:5], archspirals[1:5], B = 100L)
+two_sample_diagram_test <- function(
   x,
   y,
   dimension = 0L,

@@ -1,3 +1,4 @@
+library(ggplot2)
 library(inphr)
 
 R <- 100L
@@ -5,7 +6,7 @@ B <- 100L
 alpha <- 0.05
 
 Ns <- seq(5, 35, by = 5)
-mirai::daemons(5)
+mirai::daemons(10)
 
 withr::with_seed(1234, {
   cli::cli_h1("Power simulation for Archimedian spirals differing in variance")
@@ -201,7 +202,7 @@ withr::with_seed(1234, {
             seq(N),
             function(i) {
               S2 <- tdaunif::sample_arch_spiral(
-                n = 60L,
+                n = 90L,
                 arms = 2L,
                 ar = 1,
                 sd = 0.05
@@ -256,13 +257,13 @@ withr::with_seed(1234, {
 
 mirai::daemons(0)
 
-inference <- colnames(powers_variance)
+inference <- colnames(powers_n)
 
 tibble::tibble(
   N = rep(Ns, times = 4L),
   inference = rep(inference, each = length(Ns)),
-  power_variance = c(powers_variance),
-  power_mean = c(powers_mean),
+  # power_variance = c(powers_variance),
+  # power_mean = c(powers_mean),
   power_n = c(powers_n)
 ) |>
   tidyr::pivot_longer(

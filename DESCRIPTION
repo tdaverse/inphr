@@ -10,7 +10,7 @@ Description: A set of functions for performing null hypothesis testing on
     persistence diagrams themselves or vectorizations. In the former case, they
     are embedded in a metric space using either the Bottleneck or Wasserstein
     distance. In the former case, persistence data becomes functional data and
-    inference is performed using tools available in the {fdatest} package.
+    inference is performed using tools available in the 'fdatest' package.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -19,8 +19,11 @@ URL: https://github.com/tdaverse/inphr, https://tdaverse.github.io/inphr/
 BugReports: https://github.com/tdaverse/inphr/issues
 Imports: 
     cli,
+    fdatest,
     flipr,
-    phutil
+    phutil,
+    rlang,
+    TDAvec
 Depends: 
     R (>= 3.5)
 LazyData: true
