@@ -46,7 +46,7 @@
 #'
 #' @export
 #' @examples
-#' out <- two_sample_functional_test(trefoils1, archspirals, B = 100L, scale_size = 50L)
+#' out <- two_sample_functional_test(trefoils1, archspirals, B = 10L, scale_size = 20L)
 #' plot(out$iwt, xrange = range(out$scale_seq))
 #' matplot(
 #'   out$scale_seq[-1],

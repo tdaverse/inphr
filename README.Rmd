@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/tdaverse/inphr/graph/badge.svg)](https://app.codecov.io/gh/tdaverse/inphr)
 [![R-CMD-check](https://github.com/tdaverse/inphr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tdaverse/inphr/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/inphr)](https://CRAN.R-project.org/package=inphr)
 <!-- badges: end -->
 
 The goal of [{inphr}](https://tdaverse.github.io/inphr/) is to provide a set of
