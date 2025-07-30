@@ -60,20 +60,56 @@
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"tdaverse/inphr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Let us start by loading the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tdaverse/inphr" class="external-link">inphr</a></span><span class="op">)</span></span></code></pre></div>
-<p>The package contains three sets of persistence diagrams, which can be used for testing. They are available in the package as <code>trefoils1</code>, <code>trefoils2</code>, and <code>archspirals</code>. The first two sets contain persistence diagrams computed from noisy samples of trefoil knots, while the third set contains persistence diagrams computed from noisy samples of 2-armed Archimedean spirals. Each set contains 24 persistence diagrams, each computed from a sample of 120 points sampled from the respective shape, with Gaussian noise added (standard deviation = 0.05). The persistence diagrams were computed using the <a href="https://www.rdocumentation.org/packages/TDA/versions/1.9.1/topics/ripsDiag" class="external-link"><code>TDA::ripsDiag()</code></a> function with a maximum scale of 6 and up to dimension 2.</p>
-<p>You can use the <a href="https://tdaverse.github.io/inphr/reference/two_sample_test.html"><code>two_sample_test()</code></a> function to perform a two-sample test on these persistence diagrams. For example, to test whether the first 5 persistence diagrams from the first set are significantly different from the first 5 persistence diagrams from the second set, you can run:</p>
+<div class="section level3">
+<h3 id="toy-data">Toy data<a class="anchor" aria-label="anchor" href="#toy-data"></a>
+</h3>
+<p>The package contains three toy data sets of persistence diagrams, which can be used for testing. They are available in the package as <code>trefoils1</code>, <code>trefoils2</code>, and <code>archspirals</code>. The first two sets contain persistence diagrams computed from noisy samples of trefoil knots, while the third set contains persistence diagrams computed from noisy samples of 2-armed Archimedean spirals. Each set contains 24 persistence diagrams, each computed from a sample of 120 points sampled from the respective shape, with Gaussian noise added (standard deviation = 0.05). The persistence diagrams were computed using the <a href="https://www.rdocumentation.org/packages/TDA/versions/1.9.1/topics/ripsDiag" class="external-link"><code>TDA::ripsDiag()</code></a> function with a maximum scale of 6 and up to dimension 2.</p>
+</div>
+<div class="section level3">
+<h3 id="test-in-the-space-of-diagrams">Test in the space of diagrams<a class="anchor" aria-label="anchor" href="#test-in-the-space-of-diagrams"></a>
+</h3>
+<p>You can use the <a href="https://tdaverse.github.io/inphr/reference/two_sample_diagram_test.html"><code>two_sample_diagram_test()</code></a> function to perform a two-sample test on these persistence diagrams in the space of diagrams themselves. For example, to test whether the persistence diagrams from <code>trefoils1</code> are significantly different from the persistence diagrams from <code>trefoils2</code>, you can run:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">two_sample_test</span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">trefoils2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.9782132</span></span></code></pre></div>
-<p>To test whether the first 5 persistence diagrams from the first set are significantly different from the first 5 persistence diagrams from the third set, you can run:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/two_sample_diagram_test.html">two_sample_diagram_test</a></span><span class="op">(</span><span class="va">trefoils1</span>, <span class="va">trefoils2</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<p>To test whether the persistence diagrams from <code>trefoils1</code> are significantly different from the persistence diagrams from <code>archspirals</code>, you can run:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">two_sample_test</span><span class="op">(</span><span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">archspirals</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.008047755</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/two_sample_diagram_test.html">two_sample_diagram_test</a></span><span class="op">(</span><span class="va">trefoils1</span>, <span class="va">archspirals</span>, B <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.00990099</span></span></code></pre></div>
+<p>Optionnally, the <code><a href="reference/two_sample_diagram_test.html">two_sample_diagram_test()</a></code> function can also output the distribution of the test statistic under the null hypothesis as estimated by the permutation scheme. To do that, you can use the optional argument <code>keep_null_distribution = TRUE</code>. It is also possible to ask for the permutations themselves to be saved as part of the output. To do that, you can use the optional argument <code>keep_permutations = TRUE</code>.</p>
+<p>Test in the space of diagrams themselves is performed using test statistics that only rely on distances between sampled diagrams. By default, two such statistics that mimic Student’s t-statistic and Fisher’s F-statistic are used as proposed in Lovato, I., Pini, A., Stamm, A., &amp; Vantini, S. (2020), <em>Model-free two-sample test for network-valued data</em>. Computational Statistics &amp; Data Analysis, <strong>144</strong>, 106896.</p>
+</div>
+<div class="section level3">
+<h3 id="test-in-functional-spaces">Test in functional spaces<a class="anchor" aria-label="anchor" href="#test-in-functional-spaces"></a>
+</h3>
+<p>You can use the <a href="https://tdaverse.github.io/inphr/reference/two_sample_functional_test.html"><code>two_sample_functional_test()</code></a> function to perform a two-sample test on these persistence diagrams in functional spaces using one of five functional representations of persistence diagrams, namely: (i) Betti, (ii) Euler characteristic, (iii) normalized life, (iv) silhouette and (v) entropy curves. Computation of these functional representations is powered by the <a href="https://cran.r-project.org/package=TDAvec" class="external-link">{TDAvec}</a> package. For example, to test whether the persistence diagrams from <code>trefoils1</code> are significantly different from the persistence diagrams from <code>archspirals</code>, you can use the Betti curve representation and run:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/two_sample_functional_test.html">two_sample_functional_test</a></span><span class="op">(</span></span>
+<span>  <span class="va">trefoils1</span>,</span>
+<span>  <span class="va">archspirals</span>,</span>
+<span>  representation <span class="op">=</span> <span class="st">"betti"</span>,</span>
+<span>  B <span class="op">=</span> <span class="fl">100L</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The output is a length-4 list. The first two elements are <code>xfd</code> and <code>yfd</code> which are numeric matrices storing evaluations of the functional representation of the diagrams on a grid stored as the third element <code>scale_seq</code>. You can therefore have a look at the functional data that the function produced using something like:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/matplot.html" class="external-link">matplot</a></span><span class="op">(</span></span>
+<span>  <span class="va">out</span><span class="op">$</span><span class="va">scale_seq</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">xfd</span>, <span class="va">out</span><span class="op">$</span><span class="va">yfd</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">trefoils1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">archspirals</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<p>In the case of testing in functional spaces, {inphr} uses the interval-wise testing (IWT) procedure powered by the <a href="https://cran.r-project.org/package=fdatest" class="external-link">{fdatest}</a> package which has been proposed in Pini, A., &amp; Vantini, S. (2017), <em>Interval-wise testing for functional data</em>. Journal of Nonparametric Statistics, <strong>29</strong>(2), 407-424.</p>
+<p>The output indicates on which portions of the scale sequence does the difference between the two samples occur, providing strong control of the familywise error rate:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">iwt</span>, xrange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">scale_seq</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="100%"><img src="reference/figures/README-unnamed-chunk-8-2.png" width="100%"></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="contributions">Contributions<a class="anchor" aria-label="anchor" href="#contributions"></a>
