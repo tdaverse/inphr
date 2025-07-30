@@ -59,14 +59,14 @@ sampled from the respective shape, with Gaussian noise added (standard deviation
 function with a maximum scale of 6 and up to dimension 2.
 
 You can use the
-[`two_sample_test()`](https://tdaverse.github.io/inphr/reference/two_sample_test.html)
+[`two_sample_diagram_test()`](https://tdaverse.github.io/inphr/reference/two_sample_diagram_test.html)
 function to perform a two-sample test on these persistence diagrams. For
 example, to test whether the first 5 persistence diagrams from the first set are
 significantly different from the first 5 persistence diagrams from the second
 set, you can run:
 
 ```{r}
-two_sample_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
+two_sample_diagram_test(trefoils1[1:5], trefoils2[1:5], B = 100L)
 ```
 
 To test whether the first 5 persistence diagrams from the first set are
@@ -74,7 +74,7 @@ significantly different from the first 5 persistence diagrams from the third
 set, you can run:
 
 ```{r}
-two_sample_test(trefoils1[1:5], archspirals[1:5], B = 100L)
+two_sample_diagram_test(trefoils1[1:5], archspirals[1:5], B = 100L)
 ```
 
 ## Contributions
