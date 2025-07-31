@@ -85,13 +85,15 @@ the two samples come from the same distribution. The input data must be objects
 of class \code{persistence_set} typically produced by \code{\link[phutil:persistence-set]{phutil::as_persistence_set()}}.
 }
 \examples{
-out <- two_sample_functional_test(trefoils1, archspirals, B = 100L, scale_size = 50L)
+tref1 <- trefoils1[1:5]
+archsp <- archspirals[1:5]
+out <- two_sample_functional_test(tref1, archsp, B = 10L, scale_size = 20L)
 plot(out$iwt, xrange = range(out$scale_seq))
 matplot(
   out$scale_seq[-1],
   t(rbind(out$xfd, out$yfd)),
   type = "l",
-  col = c(rep(1, length(trefoils1)), rep(2, length(archspirals)))
+  col = c(rep(1, length(tref1)), rep(2, length(archsp)))
 )
 }
 \references{

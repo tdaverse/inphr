@@ -1,3 +1,7 @@
+## Resubmission
+
+This is a resubmission in which we made sure to shorten example execution time on windows platforms.
+
 ## Test environments
 
 * local macOS R installation, R 4.5.1

@@ -4,7 +4,7 @@
 \name{inphr-package}
 \alias{inphr}
 \alias{inphr-package}
-\title{inphr: Inference for Persistence Homology Data in R}
+\title{inphr: Inference for Persistence Homology in R}
 \description{
 A set of functions for performing null hypothesis testing on samples of persistence diagrams using the theory of permutations. Currently, only two-sample testing is implemented. Inputs can be either samples of persistence diagrams themselves or vectorizations. In the former case, they are embedded in a metric space using either the Bottleneck or Wasserstein distance. In the former case, persistence data becomes functional data and inference is performed using tools available in the 'fdatest' package.
 }

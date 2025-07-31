@@ -46,13 +46,15 @@
 #'
 #' @export
 #' @examples
-#' out <- two_sample_functional_test(trefoils1, archspirals, B = 10L, scale_size = 20L)
+#' tref1 <- trefoils1[1:5]
+#' archsp <- archspirals[1:5]
+#' out <- two_sample_functional_test(tref1, archsp, B = 10L, scale_size = 20L)
 #' plot(out$iwt, xrange = range(out$scale_seq))
 #' matplot(
 #'   out$scale_seq[-1],
 #'   t(rbind(out$xfd, out$yfd)),
 #'   type = "l",
-#'   col = c(rep(1, length(trefoils1)), rep(2, length(archspirals)))
+#'   col = c(rep(1, length(tref1)), rep(2, length(archsp)))
 #' )
 two_sample_functional_test <- function(
   x,
@@ -66,17 +68,8 @@ two_sample_functional_test <- function(
   B = 1000L,
   paired = FALSE
 ) {
-  if (!inherits(x, "persistence_set")) {
-    cli::cli_abort(
-      "The first argument {.arg x} must be of class {.cls persistence_set}."
-    )
-  }
-
-  if (!inherits(y, "persistence_set")) {
-    cli::cli_abort(
-      "The second argument {.arg y} must be of class {.cls persistence_set}."
-    )
-  }
+  x <- phutil::as_persistence_set(x)
+  y <- phutil::as_persistence_set(y)
 
   # Match arguments
   representation <- rlang::arg_match(representation)
