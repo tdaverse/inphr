@@ -143,60 +143,32 @@ following components:</p><ul><li><p><code>basis</code>: A string indicating the 
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">two_sample_functional_test</span><span class="op">(</span><span class="va">trefoils1</span>, <span class="va">archspirals</span>, B <span class="op">=</span> <span class="fl">100L</span>, scale_size <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tref1</span> <span class="op">&lt;-</span> <span class="va">trefoils1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">archsp</span> <span class="op">&lt;-</span> <span class="va">archspirals</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">two_sample_functional_test</span><span class="op">(</span><span class="va">tref1</span>, <span class="va">archsp</span>, B <span class="op">=</span> <span class="fl">10L</span>, scale_size <span class="op">=</span> <span class="fl">20L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "First step: basis expansion"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Swapping 'y' and 'argvals', because 'y' is  simpler,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   and 'argvals' should be;  now  dim(argvals) =  49 ;  dim(y) =  49 x 48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   and 'argvals' should be;  now  dim(argvals) =  19 ;  dim(y) =  19 x 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Second step: joint univariate tests"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Third step: interval-wise combination and correction"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 2 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 3 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 4 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 5 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 6 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 7 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 8 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 9 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 10 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 11 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 12 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 13 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 14 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 15 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 16 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 17 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 18 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 19 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 20 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 21 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 22 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 23 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 24 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 25 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 26 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 27 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 28 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 29 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 30 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 31 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 32 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 33 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 34 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 35 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 36 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 37 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 38 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 39 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 40 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 41 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 42 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 43 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 44 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 45 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 46 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 47 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 48 out of 49"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 49 out of 49"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 2 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 3 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 4 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 5 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 6 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 7 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 8 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 9 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 10 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 11 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 12 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 13 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 14 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 15 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 16 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 17 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 18 out of 19"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "creating the p-value matrix: end of row 19 out of 19"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Interval Testing Procedure completed"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">iwt</span>, xrange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">scale_seq</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="two_sample_functional_test-1.png" alt="" width="700" height="433"></span>
@@ -205,7 +177,7 @@ following components:</p><ul><li><p><code>basis</code>: A string indicating the 
 <span class="r-in"><span>  <span class="va">out</span><span class="op">$</span><span class="va">scale_seq</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">xfd</span>, <span class="va">out</span><span class="op">$</span><span class="va">yfd</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  type <span class="op">=</span> <span class="st">"l"</span>,</span></span>
-<span class="r-in"><span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">trefoils1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">archspirals</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">tref1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">archsp</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="two_sample_functional_test-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
