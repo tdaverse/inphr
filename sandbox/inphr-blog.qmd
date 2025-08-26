@@ -1,0 +1,95 @@
+---
+title: "Statistical Inference for Persistence Homology Data"
+author: "Aymeric Stamm, Jason Cory Brunson"
+format: html
+bibliography: references.bib
+---
+
+## Topological data analysis in R
+
+Topological data analysis (TDA) is a rapidly growing field that uses techniques
+from algebraic topology to analyze the shape and structure of data. At its core,
+TDA provides tools to understand the geometric and topological features of
+datasets across multiple scales, with persistent homology (PH) being one of its
+fundamental techniques.
+
+Several R packages have emerged to provide TDA capabilities to the R community,
+including:
+
+-   [{TDA}](https://cran.r-project.org/package=TDA) which focuses on statistical
+analysis of PH and density clustering by providing an R interface for the
+efficient algorithms of the C++ libraries
+[GUDHI](https://project.inria.fr/gudhi/software/),
+[Dionysus](https://www.mrzv.org/software/dionysus/) and
+[PHAT](https://bitbucket.org/phat-code/phat/). This package also implements
+methods from @fasy2014confidence and @chazal2014stochastic for analyzing the
+statistical significance of PH features.
+-   [{TDAstats}](https://cran.r-project.org/package=TDAstats) which provides a
+comprehensive toolset for conducting TDA, specifically via the calculation of PH
+in a Vietoris-Rips complex [@wadhwa2018tdastats].
+-   [{ripserr}](https://cran.r-project.org/package=ripserr) which provides an R
+interface to the [Ripser](https://github.com/Ripser/ripser) and [Cubical Ripser](https://github.com/CubicalRipser) C++ libraries [@bauer2021ripser; @kaji2020cubical].
+-   [{TDAkit}](https://cran.r-project.org/package=TDAkit) which provides a
+variety of algorithms to learn with PH of the data based on functional summaries
+for clustering, hypothesis testing, and visualization
+[@wasserman2018topological].
+-   Other packages that have been archived due to lack of maintenance (e.g.
+[{kernelTDA}](https://cran.r-project.org/package=kernelTDA)).
+
+While these packages have made TDA more accessible, they've also introduced
+different data structures for representing persistence data, creating challenges
+for interoperability and workflow consistency. Moreover, workflows using tools
+from different packages will rely on some of the same low-level operations, like
+computing PH and calculating distances between persistence diagrams. When each
+package is built for purpose, this will lead to either duplication or cascading
+dependencies.
+
+The [{phutil}](https://tdaverse.github.io/phutil/) package addresses such
+fragmentation by providing a unified toolbox for handling persistence data. It
+offers consistent data structures and methods that work seamlessly with outputs
+from various TDA packages. As part of the
+[TDAverse](https://github.com/tdaverse) initiative, {phutil} contributes to
+creating a coherent ecosystem for topological data analysis in R.
+
+## Inference in the space of persistence diagrams
+
+### Distances between persistence diagrams
+
+Two persistence diagrams $X$ and $Y$ are canonically compared using
+**Wasserstein distances**.
+These are a family of metrics determined by a $q$-Minkowski distance on the plane
+and a $p$-norm on the distances between pairs of points matched via some $\varphi : X \to Y$:
+
+$$ \left( \sum_{x \in X}{{\lVert
+x-\varphi(x) \rVert_q}^p} \right)^{1/p} $$
+
+The distance $W_p^q(X,Y)$ is defined to be the infimum of this expression over all possible matchings.
+See the
+[vignette](https://tdaverse.github.io/phutil/articles/validation-benchmark.html)
+on distances for more detail, or @cohen2010lipschitz and @bubenik2023exact for
+detailed treatments and stability results on these families of metrics.
+
+### Permutation inference
+
+## Inference in the functional spaces
+
+### Functional representations of persistence homology
+
+### Interval-wise testing for functional data
+
+## A stable, modular, extensible package collection
+
+We are part of a loose-knit team of R developers interested in fostering a more
+sustainable and convenient package collection for TDA, which we've come to call
+the [TDAverse](https://github.com/tdaverse). The collection ranges from
+low-level, general-purpose packages like {tdaunif} and now {phutil}, through
+purpose-fit but interoperable packages like {ripserr} and {plt}, to Tidyverse
+extensions like {ggtda} and the forthcoming {tdarec}.
+
+Development of {phutil} was directly funded by an Infrastructure Steering
+Committee grant from the R Consortium, together with several other packages that
+will be presented in upcoming blog posts. While we hope to secure funding for
+other specific projects in future, we also invite interested developers or users
+to reach out with their issues or ideas.
+
+## References
