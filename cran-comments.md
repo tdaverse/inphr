@@ -1,3 +1,10 @@
+## Second resubmission
+
+This is a resubmission in which 
+
+- we modified the title to remove the redundant "in R";
+- we added in the Description field of the DESCRIPTION file some references to describing the methods in the package.
+
 ## Resubmission
 
 This is a resubmission in which we made sure to shorten example execution time on windows platforms.
