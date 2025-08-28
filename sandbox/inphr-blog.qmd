@@ -74,6 +74,14 @@ See this
 on distances for more detail, or @cohen2010lipschitz and @bubenik2023exact for
 detailed treatments and stability results on these families of metrics.
 
+In R, using the TDAverse, computation of the distance matrix is offered by the {phutil} package which is therefore a hard dependency of {inphr}.
+
+Functions in {inphr} therefore accept:
+
+- either two objects of class 'persistence_set' produced by `phutil::as_persistence_set()` representing the two samples;
+- or an object of class 'persistence_set' produced by `phutil::as_persistence_set()` representing the contatenation of the two samples and a vector of two integers providing the sample sizes;
+- or an object of class 'dist' typically produced by `phutil::bottleneck_pairwise_distances()` or `phutil::wasserstein_pairwise_distances()` and a vector of two integers with the sample sizes.
+
 ### Permutation inference
 
 The package currently includes a function to compare two samples of persistence diagrams. The statistical method for doing that is described in @lovato2021multiscale. Substantially, it performs inference in two steps:
@@ -91,7 +99,34 @@ Differently from classic parametric inference in which the null hypothesis typic
 
 However, depending on the test statistic that is used, the test only focuses on comparing some features of the probability distributions. For instance, if one uses the distance between the Frechet means as test statistic, the test will detect differences in means between the two ditributions but will be blind to differences in variances for example. For this reason, one can use multiple test statistics to make the test sensitive to differences in several moments of the distributions. This is called non-parametric combination and it is described in @pesarin2010permutation. 
 
-We use this approach in {inphr} by default to combine two test statistics that are defined in @lovato2021multiscale based solely on inter-point distances. One is sensitive to differences in means and the other to differences in variances. The dedicated function is `two_sample_diagram_test()`. It expects two input objects of class `persistence_set` as produced by `phutil::as_persistence_set()`. The user can actually choose different test statistic(s). The result of the test is a p-value that helps in making the decision of whether to reject the null hypothesis. Optionally, one can ask the function to return the permutations that have been used (`keep_permutations = TRUE`) and the permutation distribution of the combined test statistic (`keep_null_distribution = TRUE`). For example, the following code performs the test between two samples coming from the same trefoil geometry:
+We use this approach in {inphr} by default to combine two test statistics that are defined in @lovato2021multiscale based solely on inter-point distances. One is sensitive to differences in means and the other to differences in variances. The dedicated function is `two_sample_diagram_test()`. It expects two input objects of class `persistence_set` as produced by `phutil::as_persistence_set()`. The user can actually choose different test statistic(s). The result of the test is a p-value that helps in making the decision of whether to reject the null hypothesis. Optionally, one can ask the function to return the permutations that have been used (`keep_permutations = TRUE`) and the permutation distribution of the combined test statistic (`keep_null_distribution = TRUE`).
+
+### Toy examples
+
+The {inphr} package includes the following three toy data sets.
+
+::: {.callout-note icon="false"}
+## `trefoils1` and `trefoils2`
+
+Two sets of 24 persistence diagrams each computed from noisy samples of trefoil knots. Each sample consists of 120 points sampled from a trefoil knot with Gaussian noise (sd = 0.05) added. Vietoris-Rips persistence was computed up to dimension 2 with maximum scale 6 using `TDA::ripsDiag()`. Generated with seed 28415.
+:::
+
+::: {.callout-note icon="false"}
+## `archspirals`
+
+A set of 24 persistence diagrams computed from noisy samples of 2-armed Archimedean spirals. Each sample consists of 120 points sampled from an Archimedean spiral, embedded in 3D with a zero z-coordinate, then Gaussian noise (sd = 0.05) added. Vietoris-Rips persistence was computed up to dimension 2 with maximum scale 6 using `TDA::ripsDiag()`. Generated with seed 28415.
+:::
+
+The bar code and diagram representations can be found in @fig-toydata.
+
+![The first data point of each toy data set.](toydata_preview.svg){#fig-toydata}
+
+We can therefore use `inphr::two_sample_diagram_test()` to compare:
+
+- `trefoils1` and `trefoils2` with expected output that there is not enough statistical evidence to reject the hypothesis that the two samples come from the same distribution;
+- `trefoils1` and `archspirals` with expected output that we can reject the hypothesis that the two samples come from the same distribution.
+
+The following code performs the test between the two trefoil samples using only the first 5 statistical units:
 
 ```{r}
 library(inphr)
@@ -101,7 +136,7 @@ withr::with_seed(1234, {
 })
 ```
 
-As expected, the test is not able to reject the null hypothesis. By default, the function uses `B = 1000` permutations. If we compare two samples coming from different geometries (such as trefoil and archspiral), we get:
+As expected, the test is not able to reject the null hypothesis. By default, the function uses `B = 1000` permutations, which makes the p-value resolution of `r 1/1001`. If we compare instead `trefoils1` against `archspirals`, again using only the first 5 statistical units, we get:
 
 ```{r}
 withr::with_seed(1234, {
@@ -109,7 +144,7 @@ withr::with_seed(1234, {
 })
 ```
 
-As expected, the test does detect the difference even using only samples of size $5$.
+As expected, the test does detect the difference despite the small sample size.
 
 ## Inference in the functional spaces {#sec-functions}
 
