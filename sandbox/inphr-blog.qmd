@@ -1,6 +1,6 @@
 ---
 title: "Statistical Inference for Persistence Diagrams"
-author: "Aymeric Stamm, Jason Cory Brunson"
+author: "Manon Simonot, Aymeric Stamm"
 format: html
 bibliography: references.bib
 ---
@@ -84,10 +84,10 @@ Functions in {inphr} therefore accept:
 
 ### Permutation inference
 
-The package currently includes a function to compare two samples of persistence diagrams. The statistical method for doing that is described in @lovato2021multiscale. Substantially, it performs inference in two steps:
+The package currently includes a function to compare two samples of persistence diagrams. The statistical method for doing that is described in @lovato2021multiscale. Subtantively, it performs inference in two steps:
 
 1. Pre-computation of the matrix $D$ of pairwise distances between persistence diagrams within and between samples;
-2. Permutations of the rows and columns of $D$ to approximate the distribution of one more more test statistics.
+2. Permutations of the rows and columns of $D$ to approximate the distribution of one or more test statistics.
 
 Let $F_1$ be the probability distribution that generated the first sample and $F_2$ be the probability distribution that generated the second sample. Inference by permutations helps answering the following hypothesis test:
 
@@ -97,9 +97,9 @@ $$
 
 Differently from classic parametric inference in which the null hypothesis typically assumes equality of the mean parameters or the variance parameters, it is critical that the null distribution be that the entire probability distributions be the same. This is essential because only then can we permute the labels of statistical units under the null hypothesis.
 
-However, depending on the test statistic that is used, the test only focuses on comparing some features of the probability distributions. For instance, if one uses the distance between the Frechet means as test statistic, the test will detect differences in means between the two ditributions but will be blind to differences in variances for example. For this reason, one can use multiple test statistics to make the test sensitive to differences in several moments of the distributions. This is called non-parametric combination and it is described in @pesarin2010permutation. 
+However, depending on the test statistic that is used, the test only focuses on comparing some features of the probability distributions. For instance, if one uses the distance between the Frechet means as test statistic, the test will detect differences in means between the two ditributions but will be blind to differences in variances for example. For this reason, one can use multiple test statistics to make the test sensitive to differences in several moments of the distributions. This is called *non-parametric combination* and it is described in @pesarin2010permutation. 
 
-The {inphr} package uses this approach by default by relying on the [{flipr}](https://permaverse.github.io/flipr/) package which is the core package of the [permaverse](https://github.com/permaverse) collection of packages for permutation inference. Specifically, the dedicated function is `two_sample_diagram_test()` and it combines two test statistics based solely on inter-point distances that are defined in @lovato2021multiscale. One is sensitive to differences in means and the other to differences in variances. The user can actually choose one or more test statistics or even define his/her own. The result of the test is a p-value that helps in making the decision of whether to reject the null hypothesis. Optionally, one can ask the function to return the permutations that have been used (`keep_permutations = TRUE`) and the permutation distribution of the combined test statistic (`keep_null_distribution = TRUE`).
+The {inphr} package uses this approach by relying on the [{flipr}](https://permaverse.github.io/flipr/) package which is the core package of the [permaverse](https://github.com/permaverse) collection of packages for permutation inference. Specifically, the dedicated function is `two_sample_diagram_test()` and, by default, it combines two test statistics based solely on inter-point distances that are defined in @lovato2021multiscale. One is sensitive to differences in means and the other to differences in variances. The user can actually choose one or more test statistics or even define his/her own. The result of the test is a p-value that helps in making the decision of whether to reject the null hypothesis. Optionally, one can ask the function to return the permutations that have been used (`keep_permutations = TRUE`) and the permutation distribution of the combined test statistic (`keep_null_distribution = TRUE`).
 
 ### Toy examples
 
@@ -129,8 +129,11 @@ We can therefore use `inphr::two_sample_diagram_test()` to compare:
 The following code performs the test between the two trefoil samples using only the first five statistical units:
 
 ```{r}
+#| include: false
 library(inphr)
+```
 
+```{r}
 withr::with_seed(1234, {
     two_sample_diagram_test(trefoils1[1:5], trefoils2[1:5])
 })
@@ -150,7 +153,7 @@ As expected, the test does detect the difference despite the small sample size.
 
 ### Functional representations of persistence homology
 
-The {inphr} package relies on the {TDAvec} package to compute functional representations of persistence diagrams. Currently, there are five truly functional representations (i.e. curves) of a given persisence diagram $D = (b_i, d_i)_{i=1}^N$ that {TDAvec} readily provides:
+The {inphr} package relies on the [{TDAvec}](https://cran.r-project.org/package=TDAvec) package to compute functional representations of persistence diagrams. Currently, there are five truly functional representations (i.e. curves) of a given persisence diagram $D = (b_i, d_i)_{i=1}^N$ that {TDAvec} readily provides:
 
 - the Betti curve [@chazal2021introduction]:
 $$
@@ -182,7 +185,7 @@ $$
 S(t) = \sum_{i=1}^N \frac{d_i - b_i}{L} \log_2 \frac{d_i - b_i}{L} \mathbb{1}_{[b_i, d_i]}(t).
 $$
 
-@fig-betti displays for example the Betti curve representations of the 24 diagrams in each of the three toy data sets.
+@fig-betti displays, as an example, the Betti curve representations of the 24 diagrams in each of the three toy data sets.
 
 ![The Betti curves of all three toy data sets in {inphr}.](betti_curves.svg){#fig-betti}
 
@@ -247,7 +250,7 @@ plot(out1$iwt, main = "Trefoil 1 vs Trefoil 2")
 plot(out2$iwt, main = "Trefoil vs 2-arm Archspiral")
 ```
 
-@fig-iwt displays the results of the IWT procedure. We can see the portions where statistically significant differences have been detected highlighted by grey areas. The left column shows the curves of the two samples in two different colors while the right column shows the adjusted pvalue functions which provide strong control of the familywise error rate.
+@fig-iwt displays the results of the IWT procedure. We can see the portions where statistically significant differences have been detected highlighted by grey areas. The left column shows the curves of the two samples in two different colors while the right column shows the adjusted p-value functions which provide strong control of the familywise error rate.
 
 ## A stable, modular, extensible package collection
 
