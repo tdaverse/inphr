@@ -139,7 +139,7 @@ withr::with_seed(1234, {
 })
 ```
 
-As expected, the test is not able to reject the null hypothesis. By default, the function uses `B = 1000` permutations, which makes the p-value resolution of `r 1/1001`. If we compare instead `trefoils1` against `archspirals`, again using only the first five statistical units, we get:
+As expected, the test is not able to reject the null hypothesis. By default, the function uses `B = 1000` permutations, which makes the p-value resolution of $1/1001 \approx 9.99 \times 10^{-4}$. If we compare instead `trefoils1` against `archspirals`, again using only the first five statistical units, we get:
 
 ```{r}
 withr::with_seed(1234, {
@@ -195,7 +195,7 @@ $$
 
 The {inphr} package relies on the [{fdatest}](https://permaverse.github.io/fdatest/) package which is also part of the permaverse to handle hypothesis testing on functional representations of persistence homology. Specifically, the {fdatest} package implements a method called *interval-wise testing* described in @pini2017interval which effectively performs domain selection by identifying the portion(s) of the domain of definition of the functional representation where there are statistically significant differences between samples. In the future, the package will also integrate other such domain selection methods described in @abramowicz2023domain.
 
-When using functional representations, we must choose the homology dimension which we want to work on. In {inphr}, we perform inference in functional spaces with the `two_sample_functional_test()`. For example, the following code uses the Betti curves in dimension $0$ to compare the two trefoil samples:
+When using functional representations, we must choose the homology dimension which we want to work on. In {inphr}, we perform inference in functional spaces with the `two_sample_functional_test()`. For example, the following code uses the Betti curves for dimension $0$ to compare the two trefoil samples:
 
 ```{r}
 #| eval: false
@@ -211,7 +211,7 @@ out1 <- two_sample_functional_test(
 out1 <- readRDS("out1.rds")
 ```
 
-Similarly, the following code uses the Betti curves in dimension $0$ to compare the first trefoil sample and the archspiral sample:
+Similarly, the following code uses the Betti curves for dimension $0$ to compare the first trefoil sample and the archspiral sample:
 
 ```{r}
 #| eval: false
@@ -251,20 +251,5 @@ plot(out2$iwt, main = "Trefoil vs 2-arm Archspiral")
 ```
 
 @fig-iwt displays the results of the IWT procedure. We can see the portions where statistically significant differences have been detected highlighted by grey areas. The left column shows the curves of the two samples in two different colors while the right column shows the adjusted p-value functions which provide strong control of the familywise error rate.
-
-## A stable, modular, extensible package collection
-
-We are part of a loose-knit team of R developers interested in fostering a more
-sustainable and convenient package collection for TDA, which we've come to call
-the [TDAverse](https://github.com/tdaverse). The collection ranges from
-low-level, general-purpose packages like {tdaunif} and {phutil}, through
-purpose-fit but interoperable packages like {ripserr}, {plt} or {inphr}, to Tidyverse
-extensions like {ggtda} and {tdarec}.
-
-Development of {inphr} was directly funded by an Infrastructure Steering
-Committee grant from the R Consortium, together with several other packages that
-will be presented in upcoming blog posts. While we hope to secure funding for
-other specific projects in future, we also invite interested developers or users
-to reach out with their issues or ideas.
 
 ## References

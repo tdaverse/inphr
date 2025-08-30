@@ -24,11 +24,11 @@ trefoils1_plts <- purrr::map(trefoils1[1:5], \(.x) {
     geom_abline(slope = 1) +
     labs(x = "Birth", y = "Death", color = "Dimension", shape = "Dimension") +
     lims(x = c(0, max_prox), y = c(0, max_prox)) +
-    geom_fundamental_box(
-      t = prox,
-      fill = "darkgoldenrod",
-      color = "transparent"
-    ) +
+    # geom_fundamental_box(
+    #   t = prox,
+    #   fill = "darkgoldenrod",
+    #   color = "transparent"
+    # ) +
     scale_color_discrete(drop = FALSE) +
     scale_linetype_discrete(drop = FALSE) +
     scale_shape_discrete(drop = FALSE) +
@@ -56,11 +56,11 @@ trefoils2_plts <- purrr::map(trefoils2[1:5], \(.x) {
     geom_abline(slope = 1) +
     labs(x = "Birth", y = "Death", color = "Dimension", shape = "Dimension") +
     lims(x = c(0, max_prox), y = c(0, max_prox)) +
-    geom_fundamental_box(
-      t = prox,
-      fill = "darkgoldenrod",
-      color = "transparent"
-    ) +
+    # geom_fundamental_box(
+    #   t = prox,
+    #   fill = "darkgoldenrod",
+    #   color = "transparent"
+    # ) +
     scale_color_discrete(drop = FALSE) +
     scale_linetype_discrete(drop = FALSE) +
     scale_shape_discrete(drop = FALSE) +
@@ -88,11 +88,11 @@ archspirals_plts <- purrr::map(archspirals[1:5], \(.x) {
     geom_abline(slope = 1) +
     labs(x = "Birth", y = "Death", color = "Dimension", shape = "Dimension") +
     lims(x = c(0, max_prox), y = c(0, max_prox)) +
-    geom_fundamental_box(
-      t = prox,
-      fill = "darkgoldenrod",
-      color = "transparent"
-    ) +
+    # geom_fundamental_box(
+    #   t = prox,
+    #   fill = "darkgoldenrod",
+    #   color = "transparent"
+    # ) +
     scale_color_discrete(drop = FALSE) +
     scale_linetype_discrete(drop = FALSE) +
     scale_shape_discrete(drop = FALSE) +
@@ -117,7 +117,7 @@ patchwork::wrap_plots(
   ),
   nrow = 3L
 ) +
-  plot_layout(guides = "collect", widths = c(rep(1, 5), 0.1)) &
+  patchwork::plot_layout(guides = "collect", widths = c(rep(1, 5), 0.1)) &
   theme(legend.position = "bottom")
 
 lims <- TDAvec::computeLimits(
