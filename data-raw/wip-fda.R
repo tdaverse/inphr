@@ -1,23 +1,30 @@
-n <- 10
+n <- 30
 
 # Variance effect ---------------------------------------------------------
 
 spl1 <- purrr::map(1:n, \(.x) {
-  pts <- tdaunif::sample_arch_spiral(n = 120L, arms = 3L, ar = 1, sd = 0.05)
+  pts <- tdaunif::sample_arch_spiral(n = 120L, arms = 2L, ar = 1, sd = 0.05)
   TDA::ripsDiag(
     pts,
     maxdimension = 2,
     maxscale = 6
   )$diagram
-})
+}) |>
+  purrr::map(phutil::as_persistence) |>
+  phutil::as_persistence_set()
 spl2 <- purrr::map(1:n, \(.x) {
-  pts <- tdaunif::sample_arch_spiral(n = 120L, arms = 3L, ar = 1, sd = 0.1)
+  pts <- tdaunif::sample_arch_spiral(n = 120L, arms = 2L, ar = 1, sd = 0.1)
   TDA::ripsDiag(
     pts,
     maxdimension = 2,
     maxscale = 6
   )$diagram
-})
+}) |>
+  purrr::map(phutil::as_persistence) |>
+  phutil::as_persistence_set()
+
+out <- two_sample_functional_test(spl1, spl2, representation = "betti")
+plot(out$iwt)
 
 lims <- TDAvec::computeLimits(c(spl1, spl2), homDim = 0)
 # x <- seq(min(lims), max(lims), len = 1e3)
